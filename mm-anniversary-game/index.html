@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MM 十週年遊戲：兔子的旅程</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="parallax-bg" class="parallax-background">
+        <img src="assets/images/bg-forest.png" alt="Forest Background" id="bg-image">
+    </div>
+
+    <div id="game-container" class="game-container">
+        <div id="start-screen" class="screen active">
+            <img src="assets/images/mm-logo.png" alt="MM Logo" class="logo">
+            <h1 class="game-title">兔子的十年旅程</h1>
+            <button id="start-button" class="pixel-button orange">開始遊戲</button>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div id="hearts-container" class="hearts-container">
+                <img src="assets/images/heart-full.png" class="heart" data-heart="1">
+                <img src="assets/images/heart-full.png" class="heart" data-heart="2">
+                <img src="assets/images/heart-full.png" class="heart" data-heart="3">
+            </div>
+
+            <button id="mute-button" class="mute-button"><span class="speaker-icon">🔊</span></button>
+
+            <div id="progress-indicator" class="progress-indicator">
+                <span id="current-question">1</span> / <span id="total-questions">12</span>
+            </div>
+
+            <div id="bunny-container" class="character-container left">
+                <img src="assets/images/bunny-idle.png" id="bunny-sprite" class="character-sprite" alt="Bunny">
+                <div id="story-textbox" class="textbox story-box">
+                    <p id="story-text"></p>
+                </div>
+            </div>
+
+            <div id="npc-container" class="character-container right">
+                <img src="assets/images/bear-idle.png" id="npc-sprite" class="character-sprite" alt="NPC">
+                <div id="question-textbox" class="textbox question-box">
+                    <p id="question-text"></p>
+                </div>
+            </div>
+
+            <div id="answers-container" class="answers-container"></div>
+
+            <div id="feedback-container" class="feedback-container">
+                <img src="assets/images/checkmark.png" id="correct-icon" class="feedback-icon" alt="Correct">
+                <img src="assets/images/x-mark.png" id="wrong-icon" class="feedback-icon" alt="Wrong">
+            </div>
+
+            <div id="wire-game-container" class="wire-game-container hidden">
+                <canvas id="wire-game-canvas" width="800" height="600"></canvas>
+                <div id="wire-timer" class="wire-timer">時間：<span id="timer-value">30</span>秒</div>
+            </div>
+        </div>
+
+        <div id="ending-screen" class="screen">
+            <h1 id="ending-title" class="ending-title"></h1>
+            <p id="ending-description" class="ending-description"></p>
+            <div id="ending-characters" class="ending-characters">
+                <img id="ending-bunny" src="assets/images/bunny-idle.png" alt="Bunny">
+                <img id="ending-npc" src="assets/images/bear-idle.png" alt="NPC">
+            </div>
+            <p id="score-summary" class="score-summary"></p>
+            <div class="ending-buttons">
+                <button id="restart-button" class="pixel-button orange">重新開始</button>
+                <button id="share-button" class="pixel-button blue">分享成績</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgm" src="assets/audio/bgm-loop.mp3" loop preload="auto"></audio>
+    <audio id="sfx-start" src="assets/audio/button-start.mp3" preload="auto"></audio>
+    <audio id="sfx-typing" src="assets/audio/typing.mp3" preload="auto"></audio>
+    <audio id="sfx-hover" src="assets/audio/hover.mp3" preload="auto"></audio>
+    <audio id="sfx-select" src="assets/audio/select.mp3" preload="auto"></audio>
+    <audio id="sfx-correct" src="assets/audio/correct.mp3" preload="auto"></audio>
+    <audio id="sfx-wrong" src="assets/audio/wrong.mp3" preload="auto"></audio>
+    <audio id="sfx-hop" src="assets/audio/bunny-hop.mp3" preload="auto"></audio>
+    <audio id="sfx-victory-gold" src="assets/audio/victory-gold.mp3" preload="auto"></audio>
+    <audio id="sfx-victory-silver" src="assets/audio/victory-silver.mp3" preload="auto"></audio>
+    <audio id="sfx-victory-bronze" src="assets/audio/victory-bronze.mp3" preload="auto"></audio>
+    <audio id="sfx-gameover" src="assets/audio/gameover.mp3" preload="auto"></audio>
+
+    <script src="js/audio.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/dialogue.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/wiregame.js"></script>
+    <script src="js/main.js"></script>
+    
+</body>
+</html>
+
