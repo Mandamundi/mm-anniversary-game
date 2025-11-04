@@ -23,7 +23,7 @@ const QUESTIONS = [
       '30-40 人',
       '40-50 人'
     ],
-    correctAnswer: 2
+    correctAnswer: 1
   },
   {
     id: 2,
