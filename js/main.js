@@ -32,7 +32,6 @@ function initializeGame() {
   preloadAudio();
   document.getElementById('start-button').addEventListener('click', startGame);
   document.getElementById('restart-button').addEventListener('click', restartGame);
-  document.getElementById('share-button').addEventListener('click', shareScore);
   document.getElementById('mute-button').addEventListener('click', toggleMute);
   document.getElementById('copy-code-button').addEventListener('click', copyDiscountCode);
   initParallax();
