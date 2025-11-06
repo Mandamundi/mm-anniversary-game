@@ -1,5 +1,5 @@
 /* ============================================
-   BASE STYLES - NO FIXED SIZES
+   RESET & BASE
    ============================================ */
 
    * {
@@ -44,14 +44,34 @@
   }
   
   /* ============================================
-     GAME CONTAINER - FLEXIBLE SIZING
+     GAME CONTAINER - CENTERED & SCALED
      ============================================ */
   
   .game-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 900px;
+    /* Scale to fit viewport while maintaining aspect ratio */
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+  
+  /* Auto-scale content to fit container */
+  @supports (container-type: size) {
+    .game-container {
+      container-type: size;
+    }
+  }
+  
+  /* Fallback scaling for smaller viewports */
+  @media (max-width: 850px), (max-height: 950px) {
+    .game-container {
+      transform: translate(-50%, -50%) scale(min(calc(95vw / 800), calc(95vh / 900)));
+      transform-origin: center;
+    }
   }
   
   /* ============================================
@@ -80,23 +100,25 @@
      START SCREEN
      ============================================ */
   
+  #start-screen {
+    gap: 20px;
+  }
+  
   .logo {
-    width: min(20vw, 240px);
+    width: 200px;
     height: auto;
-    margin-bottom: 2vh;
     image-rendering: pixelated;
   }
   
   .game-title {
-    font-size: clamp(24px, 4vw, 48px);
-    margin-bottom: 2vh;
+    font-size: 42px;
     text-align: center;
   }
   
   .pixel-button {
     border: 4px solid #ffffff;
-    padding: clamp(10px, 1.5vh, 15px) clamp(30px, 4vw, 40px);
-    font-size: clamp(18px, 2vw, 24px);
+    padding: 12px 36px;
+    font-size: 22px;
     font-family: 'VCR OSD Mono', monospace;
     cursor: pointer;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
@@ -118,262 +140,268 @@
   }
   
   /* ============================================
-     GAME SCREEN - POKEMON BATTLE LAYOUT
+     GAME SCREEN - FIXED LAYOUT
      ============================================ */
   
-  /* Score display - top left */
-  .score-container {
-    position: fixed;
-    top: 2vh;
-    left: 2vw;
-    background: rgba(0, 0, 0, 0.9);
-    border: 3px solid #FFD700;
-    padding: clamp(8px, 1vh, 15px) clamp(12px, 2vw, 25px);
-    font-size: clamp(18px, 2.5vw, 32px);
-    display: flex;
-    align-items: center;
-    gap: 0.5vw;
-    z-index: 15;
-  }
-  
-  .score-label {
-    color: #FFFFFF;
-  }
-  
-  .score-value {
-    color: #FFFFFF;
-    font-weight: bold;
-    transition: transform 0.3s ease, color 0.3s ease;
-  }
-  
-  /* Mute button - top right */
-  .mute-button {
-    position: fixed;
-    top: 2vh;
-    right: 2vw;
-    width: clamp(40px, 5vw, 50px);
-    height: clamp(40px, 5vw, 50px);
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    border: 2px solid #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 15;
-    font-size: clamp(16px, 2vw, 20px);
-  }
-  
-  /* Progress indicator - top center */
-  .progress-indicator {
-    position: fixed;
-    top: 2vh;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    padding: clamp(6px, 1vh, 10px) clamp(10px, 2vw, 15px);
-    border: 2px solid #888;
-    font-size: clamp(14px, 1.5vw, 18px);
-    z-index: 15;
-  }
+     #game-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 60px 20px 20px 20px; /* Top padding for UI elements */
+    }
+    
+    /* Top UI Bar - These stay fixed */
+    .score-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.9);
+      border: 3px solid #FFD700;
+      padding: 8px 16px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+    }
+    
+    .score-label {
+      color: #FFFFFF;
+    }
+    
+    .score-value {
+      color: #FFFFFF;
+      font-weight: bold;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    
+    .mute-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 44px;
+      height: 44px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 18px;
+    }
+    
+    .progress-indicator {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      padding: 8px 14px;
+      border: 2px solid #888;
+      font-size: 16px;
+      z-index: 10;
+    }
+
+    /* ============================================
+   GAME CONTENT - FLOWS TOGETHER
+   ============================================ */
+
+    /* Main content wrapper that groups everything */
+    #game-screen > *:not(.score-container):not(.mute-button):not(.progress-indicator):not(.feedback-container) {
+      position: relative;
+    }
   
   /* ============================================
-     CHARACTER LAYOUT - POKEMON STYLE
+     NPC SECTION - TOP RIGHT
      ============================================ */
   
-  /* NPC Character - Top Right */
-  .character-container.right {
-    position: fixed;
-    top: 12vh;
-    right: 2vw; /* Changed from 5vw to 2vw */
-    left: auto; /* Ensure left is auto */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 3;
-    max-width: 46vw; /* Limit width to prevent overflow */
-    transition: opacity 0.3s ease;
-  }
-  
-  .character-container.right .character-sprite {
-    width: clamp(80px, 12vw, 180px); /* Reduced max size */
-    height: clamp(80px, 12vw, 180px);
-    image-rendering: pixelated;
-    object-fit: contain;
-    margin-bottom: 1vh;
-  }
-  
-  .character-container.right .textbox {
-    width: min(46vw, 450px); /* Reduced from 85vw to prevent overflow */
-    max-width: 450px;
-    background: rgba(0, 0, 0, 0.92);
-    border: 3px solid #ffffff;
-    padding: clamp(10px, 1.5vh, 18px);
-    font-size: clamp(13px, 1.6vw, 17px);
-    line-height: 1.4;
-    color: #ffffff;
-    min-height: clamp(70px, 10vh, 110px);
-    max-height: 18vh;
-    overflow-y: auto;
-    word-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  /* Bunny Character - Bottom Left */
-  .character-container.left {
-    position: fixed;
-    bottom: clamp(22vh, 28vh, 32vh); /* Dynamic bottom position */
-    left: 2vw; /* Changed from 5vw to 2vw */
-    right: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    z-index: 2;
-    max-width: 46vw; /* Limit width */
-  }
-  
-  .character-container.left .character-sprite {
-    width: clamp(70px, 10vw, 130px); /* Reduced max size */
-    height: clamp(70px, 10vw, 130px);
-    image-rendering: pixelated;
-    object-fit: contain;
-    margin-bottom: 1vh;
-  }
-  
-  .character-container.left .textbox,
-  .story-box {
-    width: min(46vw, 380px); /* Reduced from 75vw */
-    background: rgba(0, 0, 0, 0.85);
-    border: 3px solid #ffffff;
-    padding: clamp(8px, 1.2vh, 14px);
-    font-size: clamp(12px, 1.4vw, 15px);
-    line-height: 1.4;
-    color: #ffffff;
-    min-height: clamp(50px, 8vh, 90px);
-    max-height: 15vh;
-    overflow-y: auto;
-    word-wrap: break-word;
-    hyphens: auto;
-  }
+     .character-container.right {
+      position: relative;
+      margin-left: auto;
+      margin-right: 40px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      z-index: 3;
+      width: 420px;
+    }
+    
+    .character-container.right .character-sprite {
+      width: 140px;
+      height: 140px;
+      image-rendering: pixelated;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+    
+    .character-container.right .textbox {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      border: 3px solid #ffffff;
+      padding: 14px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #ffffff;
+      min-height: 100px;
+      max-height: 160px;
+      overflow-y: auto;
+    }
   
   /* ============================================
-     ANSWER OPTIONS - BOTTOM
+     BUNNY SECTION - MIDDLE LEFT
      ============================================ */
   
-.answers-container {
-  position: fixed;
-  bottom: 3vh;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(90vw, 700px);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: clamp(8px, 1vh, 12px);
-  z-index: 5;
-  }
-  
-  .answer-option {
-    width: 100%;
-    min-height: clamp(45px, 6vh, 65px);
-    padding: clamp(8px, 1.2vh, 14px);
-    font-size: clamp(13px, 1.5vw, 16px);
-    line-height: 1.3;
-    font-family: 'VCR OSD Mono', monospace;
-    background: rgba(50, 50, 50, 0.95);
-    border: 3px solid #888888;
-    color: #ffffff;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    word-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  .answer-option:hover {
-    border-color: #ffffff;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    background: rgba(80, 80, 80, 0.95);
-  }
-  
-  .answer-option:active {
-    animation: pulse 0.2s ease;
-  }
+     .character-container.left {
+      position: relative;
+      margin-left: 40px;
+      margin-right: auto;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 2;
+      width: 360px;
+    }
+    
+    .character-container.left .character-sprite {
+      width: 110px;
+      height: 110px;
+      image-rendering: pixelated;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    
+    .character-container.left .textbox,
+    .story-box {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      border: 3px solid #ffffff;
+      padding: 12px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: #ffffff;
+      min-height: 80px;
+      max-height: 140px;
+      overflow-y: auto;
+    }
   
   /* ============================================
-     FEEDBACK ICONS
+     FEEDBACK ICONS - CENTER
      ============================================ */
   
-  .feedback-container {
-    position: fixed;
-    top: 45vh;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
-    pointer-events: none;
-  }
+     .feedback-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      pointer-events: none;
+    }
+    
+    .feedback-icon {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 64px;
+      height: 64px;
+      transform: translate(-50%, 0) scale(0);
+      opacity: 0;
+      transition: all 0.3s ease;
+      image-rendering: pixelated;
+    }
+    
+    .feedback-icon.show {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+    }
   
-  .feedback-icon {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: clamp(48px, 8vw, 80px);
-    height: clamp(48px, 8vw, 80px);
-    transform: translate(-50%, 0) scale(0);
-    opacity: 0;
-    transition: all 0.3s ease;
-    image-rendering: pixelated;
-  }
+  /* ============================================
+     ANSWER OPTIONS - 2x2 GRID AT BOTTOM
+     ============================================ */
   
-  .feedback-icon.show {
-    opacity: 1;
-    transform: translate(-50%, 0) scale(1);
-  }
+     .answers-container {
+      position: relative;
+      width: 720px;
+      max-width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      z-index: 5;
+    }
+    
+    .answer-option {
+      width: 100%;
+      height: 70px;
+      padding: 12px;
+      font-size: 15px;
+      line-height: 1.3;
+      font-family: 'VCR OSD Mono', monospace;
+      background: rgba(50, 50, 50, 0.95);
+      border: 3px solid #888888;
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      word-wrap: break-word;
+      overflow: hidden;
+    }
+    
+    .answer-option:hover {
+      border-color: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      background: rgba(80, 80, 80, 0.95);
+    }
+    
+    .answer-option:active {
+      animation: pulse 0.2s ease;
+    }
   
   /* ============================================
      ENDING SCREEN
      ============================================ */
   
   #ending-screen {
-    padding: 4vh 4vw;
+    padding: 40px;
     overflow-y: auto;
-    justify-content: flex-start;
+    gap: 20px;
   }
   
   .ending-title {
-    font-size: clamp(28px, 5vw, 64px);
-    margin: 2vh 0;
+    font-size: 52px;
     text-align: center;
   }
   
   .ending-description {
-    font-size: clamp(16px, 2vw, 24px);
-    max-width: min(90vw, 600px);
+    font-size: 20px;
+    max-width: 600px;
     text-align: center;
-    margin: 2vh auto;
     line-height: 1.6;
   }
   
   .score-summary {
-    font-size: clamp(18px, 2.5vw, 28px);
-    margin: 2vh 0;
+    font-size: 24px;
     text-align: center;
   }
   
   .ending-characters {
     display: flex;
-    gap: 4vw;
+    gap: 30px;
     align-items: center;
     justify-content: center;
-    margin: 3vh 0;
   }
   
   .ending-characters img {
-    width: clamp(80px, 12vw, 150px);
-    height: clamp(80px, 12vw, 150px);
+    width: 120px;
+    height: 120px;
     object-fit: contain;
     image-rendering: pixelated;
   }
@@ -381,9 +409,8 @@
   .ending-buttons {
     display: flex;
     flex-direction: column;
-    gap: 2vh;
-    width: min(80vw, 300px);
-    margin: 3vh auto;
+    gap: 16px;
+    width: 280px;
   }
   
   /* ============================================
@@ -391,23 +418,23 @@
      ============================================ */
   
   .discount-container {
-    margin: 4vh auto;
-    width: min(90vw, 500px);
+    width: 100%;
+    max-width: 480px;
   }
   
   .discount-box {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: 4px solid #FFD700;
     border-radius: 12px;
-    padding: clamp(20px, 3vh, 30px);
+    padding: 24px;
     text-align: center;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   }
   
   .discount-title {
-    font-size: clamp(20px, 3vw, 28px);
+    font-size: 24px;
     color: #FFD700;
-    margin-bottom: 2vh;
+    margin-bottom: 16px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
   
@@ -415,16 +442,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5vh;
-    margin: 2vh 0;
+    gap: 12px;
+    margin: 16px 0;
   }
   
   #discount-code-text {
-    font-size: clamp(20px, 3.5vw, 36px);
+    font-size: 28px;
     font-weight: bold;
     color: #FFFFFF;
     background: rgba(0, 0, 0, 0.3);
-    padding: clamp(10px, 1.5vh, 15px) clamp(15px, 3vw, 30px);
+    padding: 12px 24px;
     border: 3px dashed #FFD700;
     border-radius: 8px;
     letter-spacing: 2px;
@@ -435,9 +462,9 @@
     background: #FF8C00;
     border: 3px solid #FFFFFF;
     color: #FFFFFF;
-    font-size: clamp(16px, 2vw, 18px);
+    font-size: 16px;
     font-family: 'VCR OSD Mono', monospace;
-    padding: clamp(10px, 1.5vh, 12px) clamp(20px, 3vw, 24px);
+    padding: 10px 24px;
     cursor: pointer;
     transition: all 0.2s ease;
   }
@@ -452,13 +479,13 @@
   }
   
   .discount-description {
-    font-size: clamp(16px, 2vw, 20px);
+    font-size: 18px;
     color: #FFFFFF;
-    margin: 1.5vh 0 0.5vh 0;
+    margin: 12px 0 4px 0;
   }
   
   .discount-expiry {
-    font-size: clamp(14px, 1.5vw, 16px);
+    font-size: 15px;
     color: #FFD700;
     font-style: italic;
   }
@@ -466,11 +493,6 @@
   /* ============================================
      ANIMATIONS
      ============================================ */
-  
-  @keyframes sprite-idle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-2px); }
-  }
   
   @keyframes hop {
     0%, 100% { transform: translateY(0); }
@@ -483,17 +505,6 @@
     100% { transform: scale(1); }
   }
   
-  @keyframes fadeInScale {
-    from {
-      opacity: 0;
-      transform: translate(-50%, 0) scale(0);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, 0) scale(1);
-    }
-  }
-  
   .hopping {
     animation: hop 0.5s ease-in-out;
   }
@@ -502,181 +513,45 @@
     animation: sprite-idle 2s ease-in-out infinite;
   }
   
+  @keyframes sprite-idle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+  }
+  
   /* ============================================
-     SMALL MOBILE ADJUSTMENTS
+     VERY SMALL SCREENS - ADDITIONAL SCALING
      ============================================ */
   
-  @media screen and (max-width: 480px) {
-    .character-container.right {
-      top: 8vh;
-      right: 3vw;
+  @media (max-width: 500px), (max-height: 600px) {
+    .game-container {
+      transform: translate(-50%, -50%) scale(min(calc(95vw / 800), calc(95vh / 900)));
     }
     
-    .character-container.left {
-      bottom: 28vh;
-      left: 3vw;
+    /* Slightly reduce font sizes for tiny screens */
+    .answer-option {
+      font-size: 13px;
     }
     
-    .answers-container {
-      bottom: 2vh;
-      width: 95vw;
-    }
-  }
-
-  @media screen and (max-width: 640px) {
-    .character-container.right {
-      top: 10vh;
-      right: 1vw;
-      max-width: 48vw;
-    }
-    
-    .character-container.right .textbox {
-      width: 48vw;
-      font-size: clamp(12px, 1.5vw, 15px);
-      padding: clamp(8px, 1vh, 12px);
-    }
-    
-    .character-container.left {
-      bottom: 20vh;
-      left: 1vw;
-      max-width: 48vw;
-    }
-    
+    .character-container.right .textbox,
     .character-container.left .textbox {
-      width: 48vw;
-      font-size: clamp(11px, 1.3vw, 14px);
-      padding: clamp(6px, 0.8vh, 10px);
-    }
-    
-    .answers-container {
-      bottom: 2vh;
-      width: 96vw;
-      gap: 6px;
-    }
-    
-    .answer-option {
-      min-height: 40px;
-      font-size: 12px;
-      padding: 6px 8px;
+      font-size: 14px;
     }
   }
   
-  /* Extra small screens - single column answers if needed */
-  @media screen and (max-width: 380px) {
-    .answers-container {
-      grid-template-columns: 1fr; /* Stack answers vertically */
-      grid-template-rows: auto auto auto auto;
-      bottom: 2vh;
-      width: 94vw;
-      gap: 5px;
-    }
-    
-    .answer-option {
-      min-height: 38px;
-      font-size: 11px;
-      padding: 5px 6px;
+  /* ============================================
+     LANDSCAPE ORIENTATION ADJUSTMENT
+     ============================================ */
+  
+  @media (orientation: landscape) and (max-height: 600px) {
+    .game-container {
+      height: 850px; /* Slightly compress for landscape */
     }
     
     .character-container.left {
-      bottom: 18vh;
-    }
-  }
-  
-  
-  /* ============================================
-     LANDSCAPE MOBILE
-     ============================================ */
-  
-     @media screen and (max-height: 500px) and (orientation: landscape) {
-      .character-container.right {
-        top: 6vh;
-        max-width: 35vw;
-      }
-      
-      .character-container.right .character-sprite {
-        width: 10vh;
-        height: 10vh;
-      }
-      
-      .character-container.right .textbox {
-        max-height: 25vh;
-        font-size: 13px;
-      }
-      
-      .character-container.left {
-        bottom: 15vh;
-        max-width: 35vw;
-      }
-      
-      .character-container.left .character-sprite {
-        width: 9vh;
-        height: 9vh;
-      }
-      
-      .character-container.left .textbox {
-        max-height: 20vh;
-        font-size: 12px;
-      }
-      
-      .answers-container {
-        bottom: 2vh;
-        gap: 5px;
-        width: 95vw;
-      }
-      
-      .answer-option {
-        min-height: 35px;
-        font-size: 11px;
-        padding: 4px 6px;
-      }
+      top: 280px;
     }
     
-    /* Very short landscape screens */
-    @media screen and (max-height: 400px) and (orientation: landscape) {
-      .character-container.right .textbox,
-      .character-container.left .textbox {
-        max-height: 18vh;
-      }
-      
-      .character-container.left {
-        bottom: 12vh;
-      }
-      
-      .answer-option {
-        min-height: 30px;
-        font-size: 10px;
-      }
+    .answers-container {
+      bottom: 30px;
     }
-
-    @media screen and (min-width: 1400px) {
-      .answers-container {
-        width: min(60vw, 800px);
-        gap: 14px;
-      }
-      
-      .answer-option {
-        min-height: 70px;
-        font-size: 17px;
-        padding: 16px;
-      }
-      
-      .character-container.right {
-        right: 4vw;
-        max-width: 40vw;
-      }
-      
-      .character-container.right .textbox {
-        width: min(40vw, 500px);
-        font-size: 18px;
-      }
-      
-      .character-container.left {
-        left: 4vw;
-        max-width: 40vw;
-      }
-      
-      .character-container.left .textbox {
-        width: min(40vw, 420px);
-        font-size: 16px;
-      }
-    }
+  }
