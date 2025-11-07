@@ -2,8 +2,8 @@ const QUESTIONS = [
   {
     id: 0,
     character: 'bear',
-    storyText: '你的小生意遇到困難，需要專業見解。熊出現了...',
-    questionText: '「你需要 財經 M 平方！但你知道 MM 的五大核心價值觀是什麼嗎？」',
+    storyText: '我的小生意遇到困難，需要專業見解。熊出現了...',
+    questionText: '你需要 財經 M 平方！但你知道 MM 的五大核心價值觀是什麼嗎？',
     answers: [
       '正向影響、創新思維、用戶需求、團隊合作、當責熱情',
       '誠實、透明、創新、團隊、品質',
@@ -16,7 +16,7 @@ const QUESTIONS = [
     id: 1,
     character: 'bull',
     storyText: null,
-    questionText: '「你認為 MM 有多少人？」',
+    questionText: '你認為 MM 有多少人？',
     answers: [
       '15-20 人',
       '20-30 人',
@@ -29,7 +29,7 @@ const QUESTIONS = [
     id: 2,
     character: 'bear',
     storyText: null,
-    questionText: '「研究是他們的主力，猜猜研究部門有多少人？」',
+    questionText: '研究是他們的主力，猜猜研究部門有多少人？',
     answers: [
       '5-10 人',
       '11-15 人',
@@ -41,7 +41,7 @@ const QUESTIONS = [
   {
     id: 3,
     character: 'bear',
-    storyText: '你開始深入了解 MM 的文化...',
+    storyText: '我開始深入了解 MM 的文化...',
     questionText: '你聽到 MM 員工稱呼自己一個特別的名稱。是什麼？',
     answers: [
       'MM人',
@@ -54,7 +54,7 @@ const QUESTIONS = [
   {
     id: 4,
     character: 'bull',
-    storyText: '你正在瀏覽 MM 的網站，試圖了解他們的產品...',
+    storyText: '我正在瀏覽 MM 的網站，試圖了解他們的產品...',
     questionText: '以下哪個不是 MM 的訂閱方案？',
     answers: [
       'MM PRO',
@@ -93,7 +93,7 @@ const QUESTIONS = [
   {
     id: 7,
     character: 'bear',
-    storyText: '你快要成為 MM 專家了！',
+    storyText: '我快要成為 MM 專家了！',
     questionText: '快！「MM」實際上代表什麼意思？',
     answers: [
       'MicroMacro',
