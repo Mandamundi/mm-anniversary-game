@@ -438,12 +438,23 @@
      ENDING SCREEN
      ============================================ */
   
-  #ending-screen {
-    padding: 40px 20px;
-    overflow-y: auto;
-    gap: 20px;
-  }
-  
+     #ending-screen {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      transform: none !important;
+      padding: 3vh 4vw;
+      overflow-y: auto;
+      justify-content: center;  /* Changed from flex-start */
+    }
+    @media (max-height: 600px) {
+      #ending-screen {
+        justify-content: flex-start;  /* Revert to top-align for short viewports to avoid clipping */
+      }
+    }
+    
   .ending-title {
     font-size: 48px;
     text-align: center;
@@ -487,16 +498,18 @@
     flex-direction: column;
     gap: 16px;
     width: 280px;
+    margin: 0 auto;  /* Add this */
   }
   
   /* ============================================
      DISCOUNT CODE
      ============================================ */
   
-  .discount-container {
-    width: 100%;
-    max-width: 480px;
-  }
+     .discount-container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;  /* Add this */
+    }
   
   .discount-box {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

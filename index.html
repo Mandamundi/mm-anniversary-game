@@ -12,86 +12,77 @@
     <div id="parallax-bg" class="parallax-background">
         <img src="assets/images/bg-forest.png" alt="Forest Background" id="bg-image">
     </div>
-
     <!-- TOP UI: fixed to viewport (moved OUTSIDE game-container) -->
     <div id="score-container" class="score-container">
         <span class="score-label">分數：</span>
         <span id="score-display" class="score-value">0</span>
     </div>
-
     <button id="mute-button" class="mute-button"><span class="speaker-icon">🔊</span></button>
-
     <div id="game-container" class="game-container">
         <div id="start-screen" class="screen active">
             <img src="assets/images/mm-logo.png" alt="MM Logo" class="logo">
             <h1 class="game-title">兔子的十年旅程</h1>
             <button id="start-button" class="pixel-button orange">開始遊戲</button>
         </div>
-
         <div id="game-screen" class="screen">
             <div id="progress-indicator" class="progress-indicator">
                 <span id="current-question">1</span> / <span id="total-questions">11</span>
             </div>
-
             <div id="bunny-container" class="character-container left">
                 <img src="assets/images/bunny-idle.png" id="bunny-sprite" class="character-sprite" alt="Bunny">
             </div>
-            
+           
             <div id="unified-textbox" class="textbox unified-box">
                 <p id="story-text"></p>
                 <p id="question-text"></p>
             </div>
-            
+           
             <div id="npc-container" class="character-container right">
                 <img src="assets/images/bear-idle.png" id="npc-sprite" class="character-sprite" alt="NPC">
             </div>
-            
+           
             <div id="answers-container" class="answers-container"></div>
-            
+           
             <div id="feedback-container" class="feedback-container">
                 <img src="assets/images/checkmark.png" id="correct-icon" class="feedback-icon" alt="Correct">
                 <img src="assets/images/x-mark.png" id="wrong-icon" class="feedback-icon" alt="Wrong">
             </div>
-            
-        </div>
-
-        <div id="ending-screen" class="screen">
-            <div class="ending-inner">
-              <h1 id="ending-title" class="ending-title"></h1>
-              <p id="ending-description" class="ending-description"></p>
-              <div id="ending-characters" class="ending-characters">
-                  <img id="ending-bunny" src="assets/images/bunny-idle.png" alt="Bunny">
-                  <!-- removed #ending-npc as requested -->
-              </div>
-              <p id="score-summary" class="score-summary"></p>
-              <div id="discount-container" class="discount-container">
-                  <div class="discount-box">
-                      <p class="discount-title">🎉 專屬折扣碼 🎉</p>
-                      <div class="discount-code">
-                          <span id="discount-code-text">MM10YEAR2025</span>
-                          <button id="copy-code-button" class="copy-button">複製</button>
-                      </div>
-                      <p class="discount-description">訂閱任何方案可享 50% 折扣</p>
-                      <p class="discount-expiry">有效期至 2025年12月31日</p>
-                  </div>
-              </div>
-              <div class="ending-buttons">
-                  <button id="restart-button" class="pixel-button orange">重新開始</button>
-              </div>
-            </div>
+           
         </div>
     </div>
-
+    <div id="ending-screen" class="screen">
+        <div class="ending-inner">
+          <h1 id="ending-title" class="ending-title"></h1>
+          <p id="ending-description" class="ending-description"></p>
+          <div id="ending-characters" class="ending-characters">
+              <img id="ending-bunny" src="assets/images/bunny-idle.png" alt="Bunny">
+              <!-- removed #ending-npc as requested -->
+          </div>
+          <p id="score-summary" class="score-summary"></p>
+          <div id="discount-container" class="discount-container">
+              <div class="discount-box">
+                  <p class="discount-title">🎉 專屬折扣碼 🎉</p>
+                  <div class="discount-code">
+                      <span id="discount-code-text">MM10YEAR2025</span>
+                      <button id="copy-code-button" class="copy-button">複製</button>
+                  </div>
+                  <p class="discount-description">訂閱任何方案可享 50% 折扣</p>
+                  <p class="discount-expiry">有效期至 2025年12月31日</p>
+              </div>
+          </div>
+          <div class="ending-buttons">
+              <button id="restart-button" class="pixel-button orange">重新開始</button>
+          </div>
+        </div>
+    </div>
     <audio id="bgm" src="assets/audio/bgm-loop.mp3" loop preload="auto"></audio>
     <!-- ... other audio tags ... -->
     <audio id="sfx-score-increase" src="assets/audio/correct.mp3" preload="auto"></audio>
-
     <script src="js/audio.js"></script>
     <script src="js/parallax.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/dialogue.js"></script>
     <script src="js/questions.js"></script>
     <script src="js/main.js"></script>
-    
 </body>
 </html>
