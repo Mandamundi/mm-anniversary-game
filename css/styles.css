@@ -261,14 +261,14 @@
     position: relative;
     order: 2;
     margin-right: auto;
-    padding-left: 20px;
+    padding-left: 100px;
   }
   
   #npc-container {
     position: relative;
     order: 3;
     margin-left: auto;
-    padding-right: 20px;
+    padding-right: 100px;
   }
   
   /* Keep them on same horizontal line */
@@ -476,6 +476,10 @@
     height: 120px;
     object-fit: contain;
     image-rendering: pixelated;
+  }
+
+  #ending-npc {
+    display: none;
   }
   
   .ending-buttons {
