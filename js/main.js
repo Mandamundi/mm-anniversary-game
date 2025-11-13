@@ -104,19 +104,44 @@ function displayQuestion(question) {
 }
 
 function renderAnswerOptions(question) {
-  const { answers, correctAnswer } = question;
+  const { answers, correctAnswer, type } = question;  // Destructure type
   const container = document.getElementById('answers-container');
   if (!answers) return;
+  
   answers.forEach((answer, index) => {
     const button = document.createElement('button');
     button.className = 'answer-option';
-    button.textContent = answer;
     button.dataset.index = index.toString();
     button.dataset.correct = (index === correctAnswer).toString();
     button.addEventListener('mouseenter', () => playSound('hover'));
     button.addEventListener('click', () => handleAnswerClick(button, question));
+    
+    if (type === 'color') {
+      // No text, just color fill
+      button.textContent = '';
+      button.style.backgroundColor = answer;  // Apply hex as background
+      button.style.borderColor = '#FFFFFF';   // Override border for visibility
+      // Optional: Add subtle gradient or border-radius for polish
+      button.style.background = `linear-gradient(135deg, ${answer} 0%, ${adjustBrightness(answer, -10)} 100%)`;
+      // Helper function to slightly darken for gradient (define below)
+    } else {
+      button.textContent = answer;  // Standard text for other questions
+    }
+    
     container.appendChild(button);
   });
+}
+
+// Helper to adjust hex brightness (add this utility function to main.js)
+function adjustBrightness(hex, percent) {
+  // Simple hex adjuster—implement or use a lib if needed
+  let r = parseInt(hex.slice(1, 3), 16);
+  let g = parseInt(hex.slice(3, 5), 16);
+  let b = parseInt(hex.slice(5, 7), 16);
+  r = Math.max(0, Math.min(255, Math.round(r + (r * percent / 100))));
+  g = Math.max(0, Math.min(255, Math.round(g + (g * percent / 100))));
+  b = Math.max(0, Math.min(255, Math.round(b + (b * percent / 100))));
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
 }
 
 function handleAnswerClick(button, question) {
