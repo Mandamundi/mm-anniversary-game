@@ -18,10 +18,10 @@ const QUESTIONS = [
     storyText: '財經 M 平方？在搜索引擎查詢好像常常看到使用那抹綠色的平台...',
     questionText: '沒錯！讓我來考考你M平方的代表色是哪個顏色呢？',
     answers: [
-      '15-20 人',
-      '20-30 人',
-      '30-40 人',
-      '40-50 人'
+      'A',
+      'B',
+      'C',
+      'D'
     ],
     correctAnswer: 1
   },

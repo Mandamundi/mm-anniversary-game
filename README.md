@@ -22,4 +22,3 @@ Notes
 - Music starts after pressing Start.
 - Mute with the speaker button (🔊/🔇).
 - Game features 10 linear questions with score-based endings.
-
