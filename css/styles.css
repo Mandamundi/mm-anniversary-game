@@ -403,6 +403,23 @@
     animation: pulse 0.2s ease;
   }
   
+  .answer-option.correct-answer {
+    background-color: #4CAF50 !important;
+    border-color: #45a049 !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+    transition: all 0.3s ease;
+  }
+  
+  .answer-option.wrong-answer {
+    background-color: #f44336 !important;
+    border-color: #da190b !important;
+    transform: scale(0.95);
+    box-shadow: 0 0 20px rgba(244, 67, 54, 0.6);
+    transition: all 0.3s ease;
+  }
+  
+
   @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }

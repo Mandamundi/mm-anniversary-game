@@ -145,10 +145,25 @@ function adjustBrightness(hex, percent) {
 }
 
 function handleAnswerClick(button, question) {
-  document.querySelectorAll('.answer-option').forEach(btn => { btn.style.pointerEvents = 'none'; });
+  // Disable all buttons immediately
+  const allButtons = document.querySelectorAll('.answer-option');
+  allButtons.forEach(btn => { btn.style.pointerEvents = 'none'; });
   playSound('select');
 
   const isCorrect = button.dataset.correct === 'true';
+  
+  // Highlight the correct answer in green
+  allButtons.forEach(btn => {
+    if (btn.dataset.correct === 'true') {
+      btn.classList.add('correct-answer');
+    }
+  });
+  
+  // If wrong answer was clicked, highlight it in red
+  if (!isCorrect) {
+    button.classList.add('wrong-answer');
+  }
+  
   if (isCorrect) {
     showFeedback('correct');
     playSound('correct');
@@ -159,8 +174,10 @@ function handleAnswerClick(button, question) {
     playSound('wrong');
     setGameTimeout(() => { advanceToNextQuestion(); }, 2000);
   }
+  
   GameState.answeredQuestions.push({ question: GameState.currentQuestion, correct: isCorrect });
 }
+
 
 function incrementScore() {
   GameState.score++;
@@ -179,9 +196,16 @@ function incrementScore() {
 
 function advanceToNextQuestion() {
   hideFeedback();
+  
+  // Remove highlight classes from previous question
+  document.querySelectorAll('.answer-option').forEach(btn => {
+    btn.classList.remove('correct-answer', 'wrong-answer');
+  });
+  
   animateBunnyHop();
   setGameTimeout(() => { loadQuestion(GameState.currentQuestion + 1); }, 600);
 }
+
 
 function endGame() {
   GameState.gameEnded = true;
