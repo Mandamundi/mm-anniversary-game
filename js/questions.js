@@ -105,7 +105,7 @@ const QUESTIONS = [
   },
   {
     id: 8,
-    character: 'bull',
+    character: 'jason',
     storyText: '好有趣喔！研究員們也都好帥好美～～',
     questionText: '沒錯～猜猜以下是哪位的Slack頭像？',
     answers: [

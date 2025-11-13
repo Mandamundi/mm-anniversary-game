@@ -24,8 +24,10 @@ function loadNPCSprite(characterType) {
       npcSprite.src = 'assets/images/bear-idle.png';
     } else if (characterType === 'bull') {
       npcSprite.src = 'assets/images/bull-idle.png';
+    } else if (characterType === 'jason') {  // New: Add your sprite here
+      npcSprite.src = 'assets/images/jason.png';  // Update path to your actual file
     } else {
-      npcContainer.style.opacity = '0';
+      npcContainer.style.opacity = '0';  // Hide for unknown types
       return;
     }
     
