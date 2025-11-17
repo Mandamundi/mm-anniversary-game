@@ -32,10 +32,10 @@ const QUESTIONS = [
     storyText: 'M平方好像是個蠻創新年輕的財經內容平台耶！他們是怎麼開始的呢？',
     questionText: '創辦人在擔任金融分析師時，發現金融市場的警訊往往有跡可循，希望能夠彙整這些數據與資料，來幫助大家能做出更適合自己的決策。你知道創辦人是哪兩位嗎？',
     answers: [
-      'Mark、Mike',
+      'Richard、Roger',
       'Rachel、Ken',
       'Rachel、Roger',
-      'Michel、Mitchell'
+      'Michael、Michel'
     ],
     correctAnswer: 1
   },
@@ -45,12 +45,12 @@ const QUESTIONS = [
     storyText: '那麼「財經Ｍ平方」這個名字的由來，有什麼原因嗎？我很好奇...',
     questionText: '財經Ｍ平方的由來是因為英文的兩個字母，這也是他們常常被稱為MM的原因，要不要猜猜是哪兩個字母？',
     answers: [
-      'Macroeconomics & Microscope',
-      'Megascope & Microscope',
-      'Macroeconomics & Microeconomics',
-      'Macroeconomics & Marketview'
+      'Making Money',
+      'Modern Madam',
+      'Michael Michel  ',
+      'Macroeconomics Microeconomics'
     ],
-    correctAnswer: 2
+    correctAnswer: 3
   },
   {
     id: 4,
