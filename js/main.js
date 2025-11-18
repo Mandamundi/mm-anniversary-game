@@ -273,7 +273,6 @@ function displayEnding(tier) {
   const ending = endings[tier];
   document.getElementById('ending-title').textContent = ending.title;
   document.getElementById('ending-description').textContent = ending.message + ' ' + ending.encouragement;
-  document.getElementById('score-summary').textContent = `你答對了 ${score}/${GameState.totalQuestions} 題`;
   stopMusic('bgm');
   playSound(ending.sound);
   showScreen('ending');
@@ -283,7 +282,7 @@ function copyDiscountCode() {
   const code = document.getElementById('discount-code-text').textContent;
   navigator.clipboard.writeText(code).then(() => {
     const button = document.getElementById('copy-code-button');
-    button.textContent = '已複製！';
+    button.textContent = '已複製';
     playSound('correct');
     
     setGameTimeout(() => {
