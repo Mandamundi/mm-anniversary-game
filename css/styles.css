@@ -221,57 +221,12 @@
      CHARACTERS - SIDE BY SIDE (BUNNY LEFT, NPC RIGHT)
      ============================================ */
   
-  /* Wrapper to contain both characters side by side */
-  #game-screen::before {
-    content: '';
-    display: block;
-    width: 100%;
-    order: 1;
-  }
-  
   .character-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 2;
   }
-  
-/* Position characters side by side */
-#bunny-container {
-  position: relative;
-  order: 2;
-  margin-right: auto;
-  padding-left: 100px;
-}
-
-#npc-container {
-  position: relative;
-  order: 3;
-  margin-left: auto;
-  padding-right: 100px;
-}
-
-/* Keep them on same horizontal line */
-#bunny-container,
-#npc-container {
-  align-self: flex-start;
-  margin-top: -120px; /* Pull them up to same line */
-}
-
-#npc-container {
-  margin-top: -120px; /* Same offset to align horizontally */
-}
-
-/* Mobile: Increase spacing between characters */
-@media (max-width: 768px) {
-  #bunny-container {
-    padding-left: 20px;
-  }
-  
-  #npc-container {
-    padding-right: 20px;
-  }
-}
   
   .character-sprite {
     width: 100px;
@@ -285,19 +240,59 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-2px); }
   }
-  
-  /* Desktop: slightly larger characters */
-  @media (min-width: 769px) {
-    .character-sprite {
-      width: 120px;
-      height: 120px;
-    }
-    
-    #bunny-container,
-    #npc-container {
-      margin-top: -140px;
-    }
+
+  /* Characters row: bunny (left) and NPC (right) on the same baseline */
+.characters-row {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;   /* align by bottom of sprite */
+  margin: 0 auto 0.5rem;   /* small gap below characters */
+  order: 2;                /* sits after the progress indicator */
+}
+
+/* Each character container still stacks its own content vertically */
+.character-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Container reset – no weird margins or padding */
+#bunny-container,
+#npc-container {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sprite sizes; both characters get same dimensions */
+.character-sprite {
+  width: 100px;
+  height: 100px;
+  image-rendering: pixelated;
+  object-fit: contain;
+  animation: sprite-idle 2s ease-in-out infinite;
+}
+
+/* Desktop: slightly larger, still aligned by baseline */
+@media (min-width: 769px) {
+  .character-sprite {
+    width: 120px;
+    height: 120px;
   }
+}
+
+/* Small screens: slightly smaller, still aligned by baseline */
+@media (max-width: 500px), (max-height: 600px) {
+  .character-sprite {
+    width: 80px;
+    height: 80px;
+  }
+}
+
   
   /* ============================================
      UNIFIED TEXTBOX - SINGLE ELEMENT
@@ -439,62 +434,82 @@
       min-height: 70px;
     }
   }
-  /* MOBILE LAYOUT TWEAKS – push everything further down */
-  @media (max-width: 768px) {
+  /* MOBILE LAYOUT TWEAKS */
+@media (max-width: 768px) {
 
-    /* 1) Move score, mute, and progress further down */
-    .score-container {
-      top: 6vh;          /* was 4vh */
-    }
-  
-    .mute-button {
-      top: 6vh;          /* keep aligned with score */
-    }
-  
-    .progress-indicator {
-      top: 12vh;         /* was 10vh – now lower */
-    }
-  
-    /* 2) In‑game content (characters + textbox) start even lower */
-    #game-screen {
-      align-items: center;
-      justify-content: flex-start;
-      padding: 20vh 20px 20px;  /* was 14vh – pushes characters/textbox further down */
-      overflow: hidden;         /* only answers scroll */
-    }
-  
-    /* Remove negative pull‑up on characters for mobile */
-    #bunny-container,
-    #npc-container {
-      margin-top: 0;
-    }
-  
-    /* Slight spacing below characters before textbox */
-    .textbox.unified-box {
-      margin-top: 1.2rem;
-      margin-bottom: 0.4rem;    /* smaller bottom margin = less gap to answers */
-    }
-  
-    /* 3) Answers scroll box: lower overall, but closer to textbox */
-    .answers-wrapper {
-      width: 90%;
-      max-width: 600px;
-      max-height: 35vh;         /* visible height of answers area */
-      margin: 0.6rem auto 0;    /* was ~1.5rem – tighter gap under textbox */
-      overflow: hidden;
-      position: relative;
-      background: transparent;
-    }
-  
-    .answers-container {
-      position: relative;
-      z-index: 1;
-      max-height: 35vh;
-      overflow-y: auto;
-      padding: 8px 4px 12px;
-      background: transparent;
-    }
+  /* Top UI: smaller and fixed to viewport */
+  .score-container {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    font-size: 16px;        /* smaller score on mobile */
+    padding: 4px 10px;
+    border-width: 2px;
+    z-index: 1000;
   }
+
+  .progress-indicator {
+    position: fixed;        /* fixed to screen, not game box */
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    padding: 4px 10px;
+    z-index: 1000;
+  }
+
+  .mute-button {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    z-index: 1000;
+  }
+
+  /* In‑game content starts below fixed top bar */
+  #game-screen {
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12vh 16px 16px;  /* push characters + textbox lower toward center */
+    overflow: hidden;  
+  }
+
+  /* Characters not pulled up on mobile */
+  #bunny-container,
+  #npc-container {
+    margin-top: 0;
+  }
+
+  /* Question/story box: slightly reduced bottom margin */
+  .textbox.unified-box {
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;   /* tighter gap to answers than before */
+  }
+
+  /* Scrollable answers box: closer to textbox */
+  .answers-wrapper {
+    width: 90%;
+    max-width: 600px;
+    max-height: 35vh;         /* visible height of answers area */
+    margin: 0.25rem auto 0;   /* smaller gap under textbox */
+    overflow: hidden;
+    position: relative;
+    background: transparent;
+  }
+
+  .answers-container {
+    position: relative;
+    z-index: 1;
+    max-height: 35vh;
+    overflow-y: auto;
+    padding: 6px 4px 10px;
+    margin: 0 auto 0;         /* REMOVE extra top margin on mobile */
+    background: transparent;
+  }
+}
+
   
   /* ============================================
      ANIMATIONS
@@ -803,11 +818,6 @@
     .character-sprite {
       width: 80px;
       height: 80px;
-    }
-    
-    #bunny-container,
-    #npc-container {
-      margin-top: -100px;
     }
   }
   
