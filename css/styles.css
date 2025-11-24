@@ -585,7 +585,7 @@
   
   
   /* ============================================
-     DISCOUNT CODE – NEW VERSION (Nov 2025)
+     DISCOUNT CODE
      ============================================ */
 
 .discount-container {
@@ -711,6 +711,74 @@
     height: 44px;
   }
 }
+
+/* === Unified discount code layout: button always under code === */
+
+.discount-code-row {
+  display: flex;
+  flex-direction: column;      /* Always vertical stack */
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.discount-code-text {
+  font-size: 32px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 12px 28px;
+  border: 3px dashed #FFD700;
+  border-radius: 10px;
+  letter-spacing: 3px;
+  min-width: 240px;
+  text-align: center;
+}
+
+/* Copy button: now always horizontal, sits under the code */
+.copy-button.vertical {
+  writing-mode: horizontal-tb;  /* override old vertical */
+  text-orientation: mixed;
+  width: 100%;
+  max-width: 240px;
+  height: 52px;
+  padding: 0 16px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'VCR OSD Mono', monospace;
+  background: #FF8C00;
+  border: 6px solid #FFFFFF;
+  color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-button.vertical:hover {
+  background: #FFA500;
+  transform: scale(1.06);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+/* Optional: slightly smaller on very small screens, same layout */
+@media (max-width: 480px) {
+  .discount-code-text {
+    font-size: 28px;
+    min-width: 200px;
+  }
+
+  .copy-button.vertical {
+    font-size: 20px;
+    height: 48px;
+    max-width: 220px;
+  }
+}
+
   
   /* ============================================
      SMALL SCREEN ADJUSTMENTS
