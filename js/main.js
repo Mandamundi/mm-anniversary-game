@@ -28,10 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeGame();
 });
 
+function trackEvent(eventName, params = {}) {
+  if (typeof window.gtag !== 'function') {
+    return;
+  }
+  window.gtag('event', eventName, {
+    event_category: '10y_game',
+    ...params
+  });
+}
+
 function initializeGame() {
   preloadAudio();
   document.getElementById('start-button').addEventListener('click', startGame);
   document.getElementById('restart-button').addEventListener('click', restartGame);
+  document.getElementById('academy-button').addEventListener('click', handleAcademyClick);
   document.getElementById('mute-button').addEventListener('click', toggleMute);
   document.getElementById('copy-code-button').addEventListener('click', copyDiscountCode);
   initParallax();
@@ -58,6 +69,7 @@ function updateLayoutMode() {
 
 
 function startGame() {
+  trackEvent('click_10y_game_start', { location: 'start-button' });
   // Show score container when game starts
   document.getElementById('score-container').style.display = 'flex';
   
@@ -166,6 +178,20 @@ function adjustBrightness(hex, percent) {
 }
 
 function handleAnswerClick(button, question) {
+  const answerIndex = Number(button.dataset.index);
+  const answerEvents = [
+    'click_10y_game_a1',
+    'click_10y_game_a2',
+    'click_10y_game_a3',
+    'click_10y_game_a4'
+  ];
+  const answerEventName = answerEvents[answerIndex];
+  if (answerEventName) {
+    trackEvent(answerEventName, {
+      location: `answer-option-${answerIndex}`,
+      question_index: GameState.currentQuestion + 1
+    });
+  }
   // Disable all buttons immediately
   const allButtons = document.querySelectorAll('.answer-option');
   allButtons.forEach(btn => { btn.style.pointerEvents = 'none'; });
@@ -304,6 +330,7 @@ function displayEnding(tier) {
 }
 
 function copyDiscountCode() {
+  trackEvent('click_10y_game_copy', { location: 'copy-code-button' });
   const code = document.getElementById('discount-code-text').textContent;
   navigator.clipboard.writeText(code).then(() => {
     const button = document.getElementById('copy-code-button');
@@ -353,6 +380,10 @@ function restartGame() {
   document.getElementById('current-question').textContent = '1';
   
   startGame();
+}
+
+function handleAcademyClick() {
+  trackEvent('click_10y_game_accademy', { location: 'academy-button' });
 }
 
 function shareScore() {
