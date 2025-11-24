@@ -97,9 +97,8 @@
   }
   
   .logo {
-    width: 200px;
+    width: 300px;
     height: auto;
-    image-rendering: pixelated;
   }
   
   .game-title {
