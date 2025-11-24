@@ -126,6 +126,14 @@
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   }
+
+  .pixel-button.green {
+    background: #2ecc71;
+  }
+  
+  .pixel-button.green:hover {
+    background: #34d27c;
+  }  
   
   .pixel-button:active {
     transform: scale(0.95);
@@ -562,11 +570,19 @@
   
   .ending-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 280px;
-    margin: 0 auto;  /* Add this */
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;              /* space between the two buttons */
+    width: 100%;
+    max-width: 480px;       /* match .discount-container / discount-box width */
+    margin: 32px auto 0;    /* centered under the discount box */
   }
+  
+  .ending-buttons .pixel-button {
+    flex: 1 1 0;            /* each takes half the available width */
+    text-align: center;
+  }
+  
   
   /* ============================================
      DISCOUNT CODE – NEW VERSION (Nov 2025)

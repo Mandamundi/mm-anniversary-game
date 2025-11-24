@@ -53,12 +53,11 @@
     </div>
     <div id="ending-screen" class="screen">
         <div class="ending-inner">
+            <div id="ending-characters" class="ending-characters">
+                <img id="ending-bunny" src="assets/images/bunny-idle.png" alt="Bunny">
+            </div>
           <h1 id="ending-title" class="ending-title"></h1>
           <p id="ending-description" class="ending-description"></p>
-          <div id="ending-characters" class="ending-characters">
-              <img id="ending-bunny" src="assets/images/bunny-idle.png" alt="Bunny">
-              <!-- removed #ending-npc as requested -->
-          </div>
           <div id="discount-container" class="discount-container">
             <div class="discount-box">
                 <p class="discount-title">🎉 恭喜完成遊戲挑戰 🎉</p>
@@ -78,9 +77,17 @@
                 <p class="discount-expiry">折扣碼即日起可使用至 2025年12月31日</p>
             </div>
         </div>
-          <div class="ending-buttons">
-              <button id="restart-button" class="pixel-button orange">重新開始</button>
-          </div>
+        <div class="ending-buttons">
+            <button id="restart-button" class="pixel-button orange">重新開始</button>
+                <a id="academy-button"
+                    class="pixel-button green"
+                    href="YOUR_ACADEMY_LINK_HERE"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    前往學院
+                </a>
+        </div>
+        
         </div>
     </div>
     <audio id="bgm" src="assets/audio/bgm-loop.mp3" loop preload="auto"></audio>
