@@ -243,35 +243,35 @@ function displayEnding(tier) {
     perfect: {
       title: '完美無瑕！',
       message: '恭喜！你也擁有 MM 魂！',
-      encouragement: '和 MM 一起持續成長吧！',
+      encouragement: '送你個小禮物，和 MM 一起持續成長吧！',
       icon: '🏆',
       sound: 'victory-gold'
     },
     excellent: {
       title: '表現優異！',
-      message: `太棒了，你答對了 ${score} 題！你有 MM 核心精神！`,
-      encouragement: '你的知識令人欽佩！和 MM 一起持續成長吧！',
+      message: `太棒了，你答對了 ${score} 題！你有 MM 精神！`,
+      encouragement: '送你個小禮物，和 MM 一起持續成長吧！',
       icon: '⭐',
       sound: 'victory-silver'
     },
     good: {
       title: '做得不錯！',
       message: `好棒，你答對了 ${score} 題！你很懂 MM :D`,
-      encouragement: '繼續學習，你會越來越厲害！和 MM 一起持續成長吧！',
+      encouragement: '送你個小禮物，和 MM 一起持續成長吧！',
       icon: '👍',
       sound: 'victory-bronze'
     },
     okay: {
-      title: '還不錯！',
+      title: '你是潛力股！',
       message: `你答對了 ${score} 題，可以再次挑戰`,
-      encouragement: '別擔心，每個人都是從學習開始的！和 MM 一起持續成長吧！',
+      encouragement: '送你個小禮物，和 MM 一起持續成長吧！',
       icon: '💪',
       sound: 'victory-bronze'
     },
     tryagain: {
       title: '繼續加油！',
       message: `你答對了 ${score} 題，繼續加油～`,
-      encouragement: '沒關係！這是學習的過程。和 MM 一起持續成長吧！',
+      encouragement: '送你個小禮物，和 MM 一起持續成長吧！',
       icon: '🌱',
       sound: 'gameover'
     }
