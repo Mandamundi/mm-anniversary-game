@@ -35,7 +35,7 @@ const QUESTIONS = [
       'Richard、Roger',
       'Rachel、Ken',
       'Rachel、Roger',
-      'Michael、Michel'
+      'Michael、Milo'
     ],
     correctAnswer: 1
   },
@@ -47,7 +47,7 @@ const QUESTIONS = [
     answers: [
       'Making Money',
       'Modern Madam',
-      'Michael Michel  ',
+      'Magic Moment',
       'Macroeconomics Microeconomics'
     ],
     correctAnswer: 3
@@ -107,10 +107,10 @@ const QUESTIONS = [
   {
     id: 8,
     character: 'jason',
-    storyText: '好厲害喔，他們的研究員們一定也都很厲害',
-    questionText: '沒錯～ 其中有一位資深研究員的代表圖像是右上這隻水豚，你覺得是代表哪位研究員呢？',
+    storyText: '好厲害喔，好想更了解他們的研究員～',
+    questionText: 'Fun Fact，有位資深研究員特別喜歡右上角這隻水豚，你覺得是哪一位呢？ ',
     answers: [
-      'Vivi',
+      'Vivianna',
       'Jason',
       'Ralice',
       'Danny'
